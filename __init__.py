@@ -34,8 +34,6 @@ from bpy.types import Operator
 from bpy.types import Menu
 from bpy.props import StringProperty
 
-mode_keymap = None
-
 class TLA_OT_changemode(Operator):
     """ Change the mode of an object """
     bl_idname = "tla.changemode"
@@ -108,26 +106,29 @@ classes = [
 ]
 
 def register():
-    key_config = bpy.context.window_manager.keyconfigs.addon
-    if key_config:
-        key_map = key_config.keymaps.new(name='3D View', space_type='VIEW_3D')
-        key_entry = key_map.keymap_items.new("tla.invokemenu",
-                                            type='W',
-                                            value='PRESS',
-                                            ctrl=True,
+    keymap = bpy.context.window_manager.keyconfigs.addon.keymaps.new(
+        name='3D View', 
+        space_type='VIEW_3D'
     )
-    mode_keymap = (key_map, key_entry)
+    item = keymap.keymap_items.new(
+        "tla.invokemenu",
+        type='W',
+        value='PRESS',
+        ctrl=True,
+    )
     for c in classes:
         bpy.utils.register_class(c)
 
-
 def unregister():
-    if mode_keymap:
-        key_map, key_entry = mode_keymap
-        key_map.keymap_items.remove(key_entry)
-        bpy.context.window_manager.keyconfigs.addon.keymaps.remove(key_map)
     for c in classes:
         bpy.utils.unregister_class(c)
+    keymap = bpy.context.window_manager.keyconfigs.addon.keymaps.new(
+        name='3D View', 
+        space_type='VIEW_3D'
+    )
+    for item in keymap.keymap_items:
+        if item.idname == 'kmap.keyhit':
+            keymap.keymap_items.remove(item)
 
 
 if __name__ == '__main__':
