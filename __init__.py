@@ -20,7 +20,7 @@ bl_info = {
     "name" : "Mode switch menu",
     "description" : "A menu for switching modes in the 3D viewport",
     "author" : "Marty",
-    "version" : (0, 0, 1),
+    "version" : (0, 0, 2),
     "blender" : (2, 80, 0),
     "location" : "View3D",
     "warning" : "",
@@ -91,7 +91,7 @@ class TLA_MT_changemode(Menu):
         elif object.type == 'GPENCIL':
             self.layout.operator("tla.changemode", text="Edit").new_mode='EDIT_GPENCIL'
             self.layout.operator("tla.changemode", text="Sculpt").new_mode='SCULPT_GPENCIL'
-            self.layout.operator("tla.changemode", text="Paint").new_mode='PAINT_GPENCIL'
+            self.layout.operator("tla.changemode", text="Draw").new_mode='PAINT_GPENCIL'
             self.layout.operator("tla.changemode", text="Weight Paint").new_mode='WEIGHT_GPENCIL'
             self.layout.operator("tla.changemode", text="Vertex Paint").new_mode='VERTEX_GPENCIL'
         elif object.type == 'LATTICE':
