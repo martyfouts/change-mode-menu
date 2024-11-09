@@ -1,3 +1,6 @@
+# Deprecated
+This repository is now deprecated. The examples apply to Blender versions 3.x. It has not been tested on newer versions of Blender.
+
 This Blender Add-on is a replacement for the CTRL-TAB mode change menu in the
 3D Viewport.  It is invoked by CTRL-W (can be changed in preferences keymap).
 
